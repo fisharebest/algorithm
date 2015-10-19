@@ -106,7 +106,7 @@ class DijkstraTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * Test the multiple shortest paths between 'E' and 'F'.
+	 * Test the exclusion list, for next-shortest paths.
 	 *
 	 * @return string[]
 	 */
