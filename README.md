@@ -20,7 +20,7 @@ shortest path(s) between two nodes in a weighted, directed graph.
 
 Graphs are specified as an array of edges, each with a cost.  The example below is
 an undirected graph (i.e. if D→E is 9, then E→D is also 9.), because it is easy to
-understand and easy to draw.  However, the algorithm works equally well for undirected
+understand and easy to draw.  However, the algorithm works equally well for directed
 graphs, where links can be one-way only or have different costs in each direction.
 ```
      D---9---E
