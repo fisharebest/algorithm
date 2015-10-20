@@ -3,7 +3,7 @@
 	"description": "Implementation of standard algorithms in PHP.",
 	"type": "library",
 	"keywords": [
-		"algorithm", "dijkstra"
+		"algorithm", "dijkstra", "myers", "diff"
 	],
 	"homepage": "https://github.com/fisharebest/algorithm",
 	"license": "GPL-3.0+",
