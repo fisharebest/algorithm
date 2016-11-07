@@ -23,7 +23,7 @@ class MyersDiffTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * Test empty sequences.
 	 *
-	 * @return string[]
+	 * @return void
 	 */
 	public function testBothEmpty() {
 		$algorithm = new MyersDiff;
@@ -37,7 +37,7 @@ class MyersDiffTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * Test one empty sequence.
 	 *
-	 * @return string[]
+	 * @return void
 	 */
 	public function testFirstEmpty() {
 		$algorithm = new MyersDiff;
@@ -55,7 +55,7 @@ class MyersDiffTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * Test one empty sequence.
 	 *
-	 * @return string[]
+	 * @return void
 	 */
 	public function testSecondEmpty() {
 		$algorithm = new MyersDiff;
@@ -71,11 +71,44 @@ class MyersDiffTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * Test identical sequences.
+	 * Test identical sequences containing one token.
 	 *
-	 * @return string[]
+	 * @return void
 	 */
-	public function testIdentical() {
+	public function testIdenticalOne() {
+		$algorithm = new MyersDiff;
+		$x = array('a');
+		$y = array('a');
+		$diff = array(
+			array('a', MyersDiff::KEEP),
+		);
+
+		$this->assertSame($diff, $algorithm->calculate($x, $y));
+	}
+
+	/**
+	 * Test identical sequences containing two tokens.
+	 *
+	 * @return void
+	 */
+	public function testIdenticalTwo() {
+		$algorithm = new MyersDiff;
+		$x = array('a', 'b');
+		$y = array('a', 'b');
+		$diff = array(
+			array('a', MyersDiff::KEEP),
+			array('b', MyersDiff::KEEP),
+		);
+
+		$this->assertSame($diff, $algorithm->calculate($x, $y));
+	}
+
+	/**
+	 * Test identical sequences containing three tokens.
+	 *
+	 * @return void
+	 */
+	public function testIdenticalThree() {
 		$algorithm = new MyersDiff;
 		$x = array('a', 'b', 'c');
 		$y = array('a', 'b', 'c');
@@ -89,9 +122,66 @@ class MyersDiffTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * Test different strings containing one token.
+	 *
+	 * @return void
+	 */
+	public function testSingleDifferentONe() {
+		$algorithm = new MyersDiff;
+		$x = array('a');
+		$y = array('x');
+		$diff = array(
+			array('a', MyersDiff::DELETE),
+			array('x', MyersDiff::INSERT),
+		);
+
+		$this->assertSame($diff, $algorithm->calculate($x, $y));
+	}
+
+	/**
+	 * Test different strings containing two token.
+	 *
+	 * @return void
+	 */
+	public function testSingleDifferentTwo() {
+		$algorithm = new MyersDiff;
+		$x = array('a', 'b');
+		$y = array('x', 'y');
+		$diff = array(
+			array('a', MyersDiff::DELETE),
+			array('b', MyersDiff::DELETE),
+			array('x', MyersDiff::INSERT),
+			array('y', MyersDiff::INSERT),
+		);
+
+		$this->assertSame($diff, $algorithm->calculate($x, $y));
+	}
+
+	/**
+	 * Test different strings containing three token.
+	 *
+	 * @return void
+	 */
+	public function testSingleDifferentThree() {
+		$algorithm = new MyersDiff;
+		$x = array('a', 'b', 'c');
+		$y = array('x', 'y', 'z');
+		$diff = array(
+			array('a', MyersDiff::DELETE),
+			array('b', MyersDiff::DELETE),
+			array('c', MyersDiff::DELETE),
+			array('x', MyersDiff::INSERT),
+			array('y', MyersDiff::INSERT),
+			array('z', MyersDiff::INSERT),
+		);
+
+		$this->assertSame($diff, $algorithm->calculate($x, $y));
+	}
+
+	/**
 	 * Test two non-empty sequences.
 	 *
-	 * @return string[]
+	 * @return void
 	 */
 	public function testBothNonEmpty() {
 		$algorithm = new MyersDiff;
@@ -113,9 +203,11 @@ class MyersDiffTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * Test delete-before-insert.
+	 * Test delete-before-insert.  Delete/insert gives the same
+	 * result as insert/delete.  Our algorithm consistently
+	 * deletes first.
 	 *
-	 * @return string[]
+	 * void
 	 */
 	public function testDeleteBeforeInsert() {
 		$algorithm = new MyersDiff;

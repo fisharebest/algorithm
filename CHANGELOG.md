@@ -1,6 +1,9 @@
 CHANGE LOG
 ==========
 
+## 1.2.0 (2016-11-07)
+ - Fix bug in Myers’ diff.  Thanks to Andreas Brunnschweiler for finding the bug and the fix.
+
 ## 1.1.0 (2015-10-20)
  - Myers’ diff
 
