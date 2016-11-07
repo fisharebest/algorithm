@@ -4,7 +4,6 @@
 	beStrictAboutTestsThatDoNotTestAnything="true"
 	beStrictAboutTestSize="true"
 	bootstrap="vendor/autoload.php"
-	checkForUnintentionallyCoveredCode="false"
 	colors="true"
 	xmlns=""
 >
