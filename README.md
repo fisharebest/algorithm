@@ -41,8 +41,6 @@ graphs, where links can be one-way only or have different costs in each directio
 Sample code for the above graph.
 
 ``` php
-use Fisharebest\Algorithm\Dijkstra;
-
 $graph = array(
   'A' => array('B' => 9, 'D' => 14, 'F' => 7),
   'B' => array('A' => 9, 'C' => 11, 'D' => 2, 'F' => 10),
@@ -53,24 +51,24 @@ $graph = array(
   'G' => array(),
 );
 
-$dijkstra = new Dijkstra($graph);
+$algorithm = new \Fisharebest\Algorithm\Dijkstra($graph);
 
 // There can be zero, one or more shortest (i.e. same total cost) paths.
 
 // No shortest path.
-$path = $dijkstra->shortestPaths('A', 'G'); // array()
+$path = $algorithm->shortestPaths('A', 'G'); // array()
 
 // Exactly one shortest path.
-$path = $dijkstra->shortestPaths('A', 'E'); // array(array('A', 'B', 'D', 'E'))
+$path = $algorithm->shortestPaths('A', 'E'); // array(array('A', 'B', 'D', 'E'))
 
 // Multiple solutions with the same shortest path.
-$path = $dijkstra->shortestPaths('E', 'F'); // array(array('E', 'D', 'B', 'F'), array('E', 'C', 'F'))
+$path = $algorithm->shortestPaths('E', 'F'); // array(array('E', 'D', 'B', 'F'), array('E', 'C', 'F'))
 
 // To find next-shortest paths, exclude one or intermediate nodes from the shortest path.
-$path = $dijkstra->shortestPaths('A', 'E'); // array(array('A', 'B', 'D', 'E'))
-$path = $dijkstra->shortestPaths('A', 'E', array('B')); // array(array('A', 'B', 'D', 'E'))
-$path = $dijkstra->shortestPaths('A', 'E', array('D')); // array(array('A', 'B', 'C', 'E'))
-$path = $dijkstra->shortestPaths('A', 'E', array('B', 'D')); // array(array('A', 'F', 'C', 'E'))
+$path = $algorithm->shortestPaths('A', 'E'); // array(array('A', 'B', 'D', 'E'))
+$path = $algorithm->shortestPaths('A', 'E', array('B')); // array(array('A', 'B', 'D', 'E'))
+$path = $algorithm->shortestPaths('A', 'E', array('D')); // array(array('A', 'B', 'C', 'E'))
+$path = $algorithm->shortestPaths('A', 'E', array('B', 'D')); // array(array('A', 'F', 'C', 'E'))
 ```
 
 ## Myers’ diff
@@ -102,3 +100,37 @@ just one sequence).
 		//  array('c', MyersDiff::INSERT),   i.e. 'c' occurs only in $y
 		// );
 ```
+## Connected components
+
+A depth-first search of a graph to find isolated groups of nodes.
+
+```
+    D    E
+   / \    \
+  /   \    \
+ A-----B   C
+  \   /
+   \ /
+    F
+```
+
+Sample code for the above graph
+
+```php
+$graph = array(
+	'A' => array('B' => 1, 'D' => 1, 'F' => 1),
+	'B' => array('A' => 1, 'D' => 1, 'F' => 1),
+	'C' => array('E' => 1),
+	'D' => array('A' => 1, 'B' => 1),
+	'E' => array('C' => 1),
+	'F' => array('A' => 1, 'B' => 1),
+);
+
+$algorithm  = new \Fisharebest\Algorithm\ConnectedComponent($graph);
+$components = $algorithm->findConnectedComponents());
+// array(
+//  1 => array('A', 'B', 'D', 'F'),
+//  2 => array('C', 'E'),
+// );
+```
+
