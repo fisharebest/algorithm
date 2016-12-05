@@ -133,3 +133,37 @@ $components = $algorithm->findConnectedComponents());
 //  2 => array('C', 'E'),
 // );
 ```
+## Connected components
+
+A depth-first search of a graph to find isolated groups of nodes.
+
+```
+    D    E
+   / \    \
+  /   \    \
+ A-----B   C
+  \   /
+   \ /
+    F
+```
+
+Sample code for the above graph
+
+```php
+$graph = array(
+	'A' => array('B' => 1, 'D' => 1, 'F' => 1),
+	'B' => array('A' => 1, 'D' => 1, 'F' => 1),
+	'C' => array('E' => 1),
+	'D' => array('A' => 1, 'B' => 1),
+	'E' => array('C' => 1),
+	'F' => array('A' => 1, 'B' => 1),
+);
+
+$algorithm  = new \Fisharebest\Algorithm\ConnectedComponent($graph);
+$components = $algorithm->findConnectedComponents());
+// array(
+//  1 => array('A', 'B', 'D', 'F'),
+//  2 => array('C', 'E'),
+// );
+```
+
