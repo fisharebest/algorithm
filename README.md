@@ -11,10 +11,15 @@ General purpose algorithms in PHP
 
 * Dijkstra
 * Myers’ diff
+* Connected/unconnected components of a graph
 
 ## Installation
 
-Use [composer](https://getcomposer.org), and add `"fisharebest/algorithm": "*"` to the dependencies in your `composer.json`.
+Install using composer.
+
+```
+composer require fisharebest/algorithm
+```
 
 
 ## Dijkstra

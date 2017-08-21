@@ -1,2 +1,4 @@
-vendor/
+build/logs/
 composer.lock
+tests/coverage/
+vendor/

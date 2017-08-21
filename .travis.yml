@@ -1,6 +1,7 @@
 language: php
 
 php:
+  - 7.2
   - 7.1
   - 7.0
   - 5.6
@@ -8,13 +9,14 @@ php:
   - 5.4
   - 5.3
 
+sudo: false
+
 install:
-  - composer install --dev --no-interaction
+  - composer update --no-interaction --prefer-lowest
 
 script:
-  - mkdir -p build/logs
-  - phpunit --strict-coverage --coverage-clover build/logs/clover.xml
+  - vendor/bin/phpunit
 
 after_script:
-  - php vendor/bin/coveralls -v
+  - php vendor/bin/coveralls --verbose
   - CODECLIMATE_REPO_TOKEN=4a5c02026c25f24ff6314ad888d40491ad64b2347c9ea3e985b541389404d438 ./vendor/bin/test-reporter

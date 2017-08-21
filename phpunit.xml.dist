@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+	beStrictAboutOutputDuringTests="true"
+	beStrictAboutTestsThatDoNotTestAnything="true"
+	beStrictAboutTestSize="true"
+	bootstrap="vendor/autoload.php"
+	checkForUnintentionallyCoveredCode="true"
+	colors="true"
+	xmlns=""
+>
+	<testsuites>
+		<testsuite name="Application Test Suite">
+			<directory>tests</directory>
+		</testsuite>
+	</testsuites>
+
+	<filter>
+		<whitelist>
+			<directory suffix=".php">src</directory>
+		</whitelist>
+	</filter>
+
+	<logging>
+		<log type="coverage-html" target="tests/coverage/"/>
+		<log type="coverage-clover" target="build/logs/clover.xml"/>
+	</logging>
+</phpunit>
