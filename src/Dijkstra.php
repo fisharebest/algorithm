@@ -135,4 +135,20 @@ class Dijkstra {
 			return $this->extractPaths($target);
 		}
 	}
+
+	/**
+	 * Calculate path distance.
+	 *
+	 * @param string[] $path The path
+	 *
+	 * @return integer Path distance
+	 */
+	public function getPathDistance(array $path) {
+		$distance = 0;
+		for ($i = 1; $i < count($path); $i++) {
+			$distance += $this->graph[$path[$i-1]][$path[$i]];
+		}
+
+		return $distance;
+	}
 }
