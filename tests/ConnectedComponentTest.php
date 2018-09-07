@@ -1,8 +1,8 @@
 <?php
+
 namespace Fisharebest\Algorithm;
 
 /**
- * @package   fisharebest/algorithm
  * @author    Greg Roach <greg@subaqua.co.uk>
  * @copyright (c) 2015 Greg Roach <greg@subaqua.co.uk>
  * @license   GPL-3.0+
@@ -18,104 +18,104 @@ namespace Fisharebest\Algorithm;
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
+class ConnectedComponentTest extends \PHPUnit_Framework_TestCase
+{
+    /**
+     * A graph with no components.
+     */
+    public function testNoComponents()
+    {
+        $graph = [];
 
-class ConnectedComponentTest extends \PHPUnit_Framework_TestCase {
-	/**
-	 * A graph with no components.
-	 *
-	 */
-	public function testNoComponents() {
-		$graph = array();
+        $components = [];
 
-		$components = array();
+        $algorithm = new ConnectedComponent($graph);
 
-		$algorithm = new ConnectedComponent($graph);
+        $this->assertSame($components, $algorithm->findConnectedComponents());
+    }
 
-		$this->assertSame($components, $algorithm->findConnectedComponents());
-	}
+    /**
+     * A graph with one component.
+     *
+     *    D----E
+     *   / \    \
+     *  /   \    \
+     * A-----B---C
+     *  \   /    /
+     *   \ /    /
+     *    F----/
+     */
+    public function testOneComponent()
+    {
+        $graph = [
+            'A' => ['B' => 1, 'D' => 1, 'F' => 1],
+            'B' => ['A' => 1, 'C' => 1, 'D' => 1, 'F' => 1],
+            'C' => ['B' => 1, 'E' => 1, 'F' => 1],
+            'D' => ['A' => 1, 'B' => 1, 'E' => 1],
+            'E' => ['C' => 1, 'D' => 1],
+            'F' => ['A' => 1, 'B' => 1, 'C' => 1],
+        ];
 
-	/**
-	 * A graph with one component.
-	 *
-	 *    D----E
-	 *   / \    \
-	 *  /   \    \
-	 * A-----B---C
-	 *  \   /    /
-	 *   \ /    /
-	 *    F----/
-	 *
-	 */
-	public function testOneComponent() {
-		$graph = array(
-			'A' => array('B' => 1, 'D' => 1, 'F' => 1),
-			'B' => array('A' => 1, 'C' => 1, 'D' => 1, 'F' => 1),
-			'C' => array('B' => 1, 'E' => 1, 'F' => 1),
-			'D' => array('A' => 1, 'B' => 1, 'E' => 1),
-			'E' => array('C' => 1, 'D' => 1),
-			'F' => array('A' => 1, 'B' => 1, 'C' => 1),
-		);
+        $components = [
+            1 => ['A', 'B', 'C', 'D', 'E', 'F'],
+        ];
 
-		$components = array(
-			1 => array('A', 'B', 'C', 'D', 'E', 'F'),
-		);
+        $algorithm = new ConnectedComponent($graph);
 
-		$algorithm = new ConnectedComponent($graph);
+        $this->assertSame($components, $algorithm->findConnectedComponents());
+    }
 
-		$this->assertSame($components, $algorithm->findConnectedComponents());
-	}
+    /**
+     * A graph with two component.
+     *
+     *    D    E
+     *   / \    \
+     *  /   \    \
+     * A-----B   C
+     *  \   /
+     *   \ /
+     *    F
+     */
+    public function testTwoComponent()
+    {
+        $graph = [
+            'A' => ['B' => 1, 'D' => 1, 'F' => 1],
+            'B' => ['A' => 1, 'D' => 1, 'F' => 1],
+            'C' => ['E' => 1],
+            'D' => ['A' => 1, 'B' => 1],
+            'E' => ['C' => 1],
+            'F' => ['A' => 1, 'B' => 1],
+        ];
 
-	/**
-	 * A graph with two component.
-	 *
-	 *    D    E
-	 *   / \    \
-	 *  /   \    \
-	 * A-----B   C
-	 *  \   /
-	 *   \ /
-	 *    F
-	 *
-	 */
-	public function testTwoComponent() {
-		$graph = array(
-			'A' => array('B' => 1, 'D' => 1, 'F' => 1),
-			'B' => array('A' => 1, 'D' => 1, 'F' => 1),
-			'C' => array('E' => 1),
-			'D' => array('A' => 1, 'B' => 1),
-			'E' => array('C' => 1),
-			'F' => array('A' => 1, 'B' => 1),
-		);
+        $components = [
+            1 => ['A', 'B', 'D', 'F'],
+            2 => ['C', 'E'],
+        ];
 
-		$components = array(
-			1 => array('A', 'B', 'D', 'F'),
-			2 => array('C', 'E'),
-		);
+        $algorithm = new ConnectedComponent($graph);
 
-		$algorithm = new ConnectedComponent($graph);
+        $this->assertSame($components, $algorithm->findConnectedComponents());
+    }
 
-		$this->assertSame($components, $algorithm->findConnectedComponents());
-	}
+    /**
+     * A graph with two component.
+     *
+     * A   B
+     */
+    public function testUnconnected()
+    {
+        $graph = [
+            'A' => [],
+            'B' => [],
+        ];
 
-	/**
-	 * A graph with two component.
-	 *
-	 * A   B
-	 *
-	 */
-	public function testUnconnected() {
-		$graph = array(
-			'A' => array(),
-			'B' => array(),
-		);
+        $components = [
+            1 => ['A'],
+            2 => ['B'],
+        ];
 
-		$components = array(
-			1 => array('A'),
-			2 => array('B'),
-		);
+        $algorithm = new ConnectedComponent($graph);
 
-		$algorithm = new ConnectedComponent($graph);
-
-		$this->assertSame($components, $algorithm->findConnectedComponents());
-	}
+        $this->assertSame($components, $algorithm->findConnectedComponents());
+    }
 }
