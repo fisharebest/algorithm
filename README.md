@@ -3,6 +3,7 @@
 [![Coverage Status](https://coveralls.io/repos/fisharebest/algorithm/badge.svg?branch=master)](https://coveralls.io/r/fisharebest/algorithm?branch=master)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/4997a2c6-fb22-433e-92c5-ae7285f1a5a0/mini.png)](https://insight.sensiolabs.com/projects/4997a2c6-fb22-433e-92c5-ae7285f1a5a0)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/fisharebest/algorithm/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/fisharebest/algorithm/?branch=master)
+[![StyleCI](https://github.styleci.io/repos/30823747/shield)](https://github.styleci.io/repos/30823747)
 [![Code Climate](https://codeclimate.com/github/fisharebest/algorithm/badges/gpa.svg)](https://codeclimate.com/github/fisharebest/algorithm)
 
 # fisharebest/algorithm
