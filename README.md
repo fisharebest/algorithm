@@ -70,7 +70,7 @@ $path = $algorithm->shortestPaths('A', 'E'); // array(array('A', 'B', 'D', 'E'))
 // Multiple solutions with the same shortest path.
 $path = $algorithm->shortestPaths('E', 'F'); // array(array('E', 'D', 'B', 'F'), array('E', 'C', 'F'))
 
-// To find next-shortest paths, exclude one or intermediate nodes from the shortest path.
+// To find next-shortest paths, exclude one or more intermediate nodes from the shortest path.
 $path = $algorithm->shortestPaths('A', 'E'); // array(array('A', 'B', 'D', 'E'))
 $path = $algorithm->shortestPaths('A', 'E', array('B')); // array(array('A', 'B', 'D', 'E'))
 $path = $algorithm->shortestPaths('A', 'E', array('D')); // array(array('A', 'B', 'C', 'E'))

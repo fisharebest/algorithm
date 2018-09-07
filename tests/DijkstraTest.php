@@ -37,14 +37,14 @@ class DijkstraTest extends \PHPUnit_Framework_TestCase
      *
      * @var integer[][] Test graph
      */
-    private $graph1 = [
-        'A' => ['B' => 9, 'D' => 14, 'F' => 7],
-        'B' => ['A' => 9, 'C' => 11, 'D' => 2, 'F' => 10],
-        'C' => ['B' => 11, 'E' => 6, 'F' => 15],
-        'D' => ['A' => 14, 'B' => 2, 'E' => 9],
-        'E' => ['C' => 6, 'D' => 9],
-        'F' => ['A' => 7, 'B' => 10, 'C' => 15],
-    ];
+    private $graph1 = array(
+        'A' => array('B' => 9, 'D' => 14, 'F' => 7),
+        'B' => array('A' => 9, 'C' => 11, 'D' => 2, 'F' => 10),
+        'C' => array('B' => 11, 'E' => 6, 'F' => 15),
+        'D' => array('A' => 14, 'B' => 2, 'E' => 9),
+        'E' => array('C' => 6, 'D' => 9),
+        'F' => array('A' => 7, 'B' => 10, 'C' => 15),
+    );
 
     /**
      * Test that there are no paths to/from 'G'.
@@ -55,8 +55,8 @@ class DijkstraTest extends \PHPUnit_Framework_TestCase
     {
         $dijkstra = new Dijkstra($this->graph1);
 
-        $this->assertSame([], $dijkstra->shortestPaths('A', 'G'));
-        $this->assertSame([], $dijkstra->shortestPaths('G', 'A'));
+        $this->assertSame(array(), $dijkstra->shortestPaths('A', 'G'));
+        $this->assertSame(array(), $dijkstra->shortestPaths('G', 'A'));
     }
 
     /**
@@ -68,7 +68,7 @@ class DijkstraTest extends \PHPUnit_Framework_TestCase
     {
         $dijkstra = new Dijkstra($this->graph1);
 
-        $this->assertSame([['A']], $dijkstra->shortestPaths('A', 'A'));
+        $this->assertSame(array(array('A')), $dijkstra->shortestPaths('A', 'A'));
     }
 
     /**
@@ -80,20 +80,20 @@ class DijkstraTest extends \PHPUnit_Framework_TestCase
     {
         $dijkstra = new Dijkstra($this->graph1);
 
-        $this->assertSame([['A', 'B']], $dijkstra->shortestPaths('A', 'B'));
-        $this->assertSame([['B', 'A']], $dijkstra->shortestPaths('B', 'A'));
+        $this->assertSame(array(array('A', 'B')), $dijkstra->shortestPaths('A', 'B'));
+        $this->assertSame(array(array('B', 'A')), $dijkstra->shortestPaths('B', 'A'));
 
-        $this->assertSame([['A', 'B', 'C']], $dijkstra->shortestPaths('A', 'C'));
-        $this->assertSame([['C', 'B', 'A']], $dijkstra->shortestPaths('C', 'A'));
+        $this->assertSame(array(array('A', 'B', 'C')), $dijkstra->shortestPaths('A', 'C'));
+        $this->assertSame(array(array('C', 'B', 'A')), $dijkstra->shortestPaths('C', 'A'));
 
-        $this->assertSame([['A', 'B', 'D']], $dijkstra->shortestPaths('A', 'D'));
-        $this->assertSame([['D', 'B', 'A']], $dijkstra->shortestPaths('D', 'A'));
+        $this->assertSame(array(array('A', 'B', 'D')), $dijkstra->shortestPaths('A', 'D'));
+        $this->assertSame(array(array('D', 'B', 'A')), $dijkstra->shortestPaths('D', 'A'));
 
-        $this->assertSame([['A', 'B', 'D', 'E']], $dijkstra->shortestPaths('A', 'E'));
-        $this->assertSame([['E', 'D', 'B', 'A']], $dijkstra->shortestPaths('E', 'A'));
+        $this->assertSame(array(array('A', 'B', 'D', 'E')), $dijkstra->shortestPaths('A', 'E'));
+        $this->assertSame(array(array('E', 'D', 'B', 'A')), $dijkstra->shortestPaths('E', 'A'));
 
-        $this->assertSame([['A', 'F']], $dijkstra->shortestPaths('A', 'F'));
-        $this->assertSame([['F', 'A']], $dijkstra->shortestPaths('F', 'A'));
+        $this->assertSame(array(array('A', 'F')), $dijkstra->shortestPaths('A', 'F'));
+        $this->assertSame(array(array('F', 'A')), $dijkstra->shortestPaths('F', 'A'));
     }
 
     /**
@@ -105,8 +105,8 @@ class DijkstraTest extends \PHPUnit_Framework_TestCase
     {
         $dijkstra = new Dijkstra($this->graph1);
 
-        $this->assertSame([['E', 'C', 'F'], ['E', 'D', 'B', 'F']], $dijkstra->shortestPaths('E', 'F'));
-        $this->assertSame([['F', 'C', 'E'], ['F', 'B', 'D', 'E']], $dijkstra->shortestPaths('F', 'E'));
+        $this->assertSame(array(array('E', 'C', 'F'), array('E', 'D', 'B', 'F')), $dijkstra->shortestPaths('E', 'F'));
+        $this->assertSame(array(array('F', 'C', 'E'), array('F', 'B', 'D', 'E')), $dijkstra->shortestPaths('F', 'E'));
     }
 
     /**
@@ -118,7 +118,7 @@ class DijkstraTest extends \PHPUnit_Framework_TestCase
     {
         $dijkstra = new Dijkstra($this->graph1);
 
-        $this->assertSame([['E', 'D', 'B', 'F']], $dijkstra->shortestPaths('E', 'F', ['C']));
-        $this->assertSame([['F', 'B', 'D', 'E']], $dijkstra->shortestPaths('F', 'E', ['C']));
+        $this->assertSame(array(array('E', 'D', 'B', 'F')), $dijkstra->shortestPaths('E', 'F', array('C')));
+        $this->assertSame(array(array('F', 'B', 'D', 'E')), $dijkstra->shortestPaths('F', 'E', array('C')));
     }
 }

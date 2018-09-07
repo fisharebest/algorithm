@@ -28,9 +28,9 @@ class MyersDiffTest extends \PHPUnit_Framework_TestCase
     public function testBothEmpty()
     {
         $algorithm = new MyersDiff();
-        $x = [];
-        $y = [];
-        $diff = [];
+        $x = array();
+        $y = array();
+        $diff = array();
 
         $this->assertSame($diff, $algorithm->calculate($x, $y));
     }
@@ -43,13 +43,13 @@ class MyersDiffTest extends \PHPUnit_Framework_TestCase
     public function testFirstEmpty()
     {
         $algorithm = new MyersDiff();
-        $x = [];
-        $y = ['a', 'b', 'c'];
-        $diff = [
-            ['a', MyersDiff::INSERT],
-            ['b', MyersDiff::INSERT],
-            ['c', MyersDiff::INSERT],
-        ];
+        $x = array();
+        $y = array('a', 'b', 'c');
+        $diff = array(
+            array('a', MyersDiff::INSERT),
+            array('b', MyersDiff::INSERT),
+            array('c', MyersDiff::INSERT),
+        );
 
         $this->assertSame($diff, $algorithm->calculate($x, $y));
     }
@@ -62,13 +62,13 @@ class MyersDiffTest extends \PHPUnit_Framework_TestCase
     public function testSecondEmpty()
     {
         $algorithm = new MyersDiff();
-        $x = ['a', 'b', 'c'];
-        $y = [];
-        $diff = [
-            ['a', MyersDiff::DELETE],
-            ['b', MyersDiff::DELETE],
-            ['c', MyersDiff::DELETE],
-        ];
+        $x = array('a', 'b', 'c');
+        $y = array();
+        $diff = array(
+            array('a', MyersDiff::DELETE),
+            array('b', MyersDiff::DELETE),
+            array('c', MyersDiff::DELETE),
+        );
 
         $this->assertSame($diff, $algorithm->calculate($x, $y));
     }
@@ -81,11 +81,11 @@ class MyersDiffTest extends \PHPUnit_Framework_TestCase
     public function testIdenticalOne()
     {
         $algorithm = new MyersDiff();
-        $x = ['a'];
-        $y = ['a'];
-        $diff = [
-            ['a', MyersDiff::KEEP],
-        ];
+        $x = array('a');
+        $y = array('a');
+        $diff = array(
+            array('a', MyersDiff::KEEP),
+        );
 
         $this->assertSame($diff, $algorithm->calculate($x, $y));
     }
@@ -98,12 +98,12 @@ class MyersDiffTest extends \PHPUnit_Framework_TestCase
     public function testIdenticalTwo()
     {
         $algorithm = new MyersDiff();
-        $x = ['a', 'b'];
-        $y = ['a', 'b'];
-        $diff = [
-            ['a', MyersDiff::KEEP],
-            ['b', MyersDiff::KEEP],
-        ];
+        $x = array('a', 'b');
+        $y = array('a', 'b');
+        $diff = array(
+            array('a', MyersDiff::KEEP),
+            array('b', MyersDiff::KEEP),
+        );
 
         $this->assertSame($diff, $algorithm->calculate($x, $y));
     }
@@ -116,13 +116,13 @@ class MyersDiffTest extends \PHPUnit_Framework_TestCase
     public function testIdenticalThree()
     {
         $algorithm = new MyersDiff();
-        $x = ['a', 'b', 'c'];
-        $y = ['a', 'b', 'c'];
-        $diff = [
-            ['a', MyersDiff::KEEP],
-            ['b', MyersDiff::KEEP],
-            ['c', MyersDiff::KEEP],
-        ];
+        $x = array('a', 'b', 'c');
+        $y = array('a', 'b', 'c');
+        $diff = array(
+            array('a', MyersDiff::KEEP),
+            array('b', MyersDiff::KEEP),
+            array('c', MyersDiff::KEEP),
+        );
 
         $this->assertSame($diff, $algorithm->calculate($x, $y));
     }
@@ -135,12 +135,12 @@ class MyersDiffTest extends \PHPUnit_Framework_TestCase
     public function testSingleDifferentONe()
     {
         $algorithm = new MyersDiff();
-        $x = ['a'];
-        $y = ['x'];
-        $diff = [
-            ['a', MyersDiff::DELETE],
-            ['x', MyersDiff::INSERT],
-        ];
+        $x = array('a');
+        $y = array('x');
+        $diff = array(
+            array('a', MyersDiff::DELETE),
+            array('x', MyersDiff::INSERT),
+        );
 
         $this->assertSame($diff, $algorithm->calculate($x, $y));
     }
@@ -153,14 +153,14 @@ class MyersDiffTest extends \PHPUnit_Framework_TestCase
     public function testSingleDifferentTwo()
     {
         $algorithm = new MyersDiff();
-        $x = ['a', 'b'];
-        $y = ['x', 'y'];
-        $diff = [
-            ['a', MyersDiff::DELETE],
-            ['b', MyersDiff::DELETE],
-            ['x', MyersDiff::INSERT],
-            ['y', MyersDiff::INSERT],
-        ];
+        $x = array('a', 'b');
+        $y = array('x', 'y');
+        $diff = array(
+            array('a', MyersDiff::DELETE),
+            array('b', MyersDiff::DELETE),
+            array('x', MyersDiff::INSERT),
+            array('y', MyersDiff::INSERT),
+        );
 
         $this->assertSame($diff, $algorithm->calculate($x, $y));
     }
@@ -173,16 +173,16 @@ class MyersDiffTest extends \PHPUnit_Framework_TestCase
     public function testSingleDifferentThree()
     {
         $algorithm = new MyersDiff();
-        $x = ['a', 'b', 'c'];
-        $y = ['x', 'y', 'z'];
-        $diff = [
-            ['a', MyersDiff::DELETE],
-            ['b', MyersDiff::DELETE],
-            ['c', MyersDiff::DELETE],
-            ['x', MyersDiff::INSERT],
-            ['y', MyersDiff::INSERT],
-            ['z', MyersDiff::INSERT],
-        ];
+        $x = array('a', 'b', 'c');
+        $y = array('x', 'y', 'z');
+        $diff = array(
+            array('a', MyersDiff::DELETE),
+            array('b', MyersDiff::DELETE),
+            array('c', MyersDiff::DELETE),
+            array('x', MyersDiff::INSERT),
+            array('y', MyersDiff::INSERT),
+            array('z', MyersDiff::INSERT),
+        );
 
         $this->assertSame($diff, $algorithm->calculate($x, $y));
     }
@@ -195,19 +195,19 @@ class MyersDiffTest extends \PHPUnit_Framework_TestCase
     public function testBothNonEmpty()
     {
         $algorithm = new MyersDiff();
-        $x = ['a', 'b', 'c', 'a', 'b', 'b', 'a'];
-        $y = ['c', 'b', 'a', 'b', 'a', 'c'];
-        $diff = [
-            ['a', MyersDiff::DELETE],
-            ['b', MyersDiff::DELETE],
-            ['c', MyersDiff::KEEP],
-            ['b', MyersDiff::INSERT],
-            ['a', MyersDiff::KEEP],
-            ['b', MyersDiff::KEEP],
-            ['b', MyersDiff::DELETE],
-            ['a', MyersDiff::KEEP],
-            ['c', MyersDiff::INSERT],
-        ];
+        $x = array('a', 'b', 'c', 'a', 'b', 'b', 'a');
+        $y = array('c', 'b', 'a', 'b', 'a', 'c');
+        $diff = array(
+            array('a', MyersDiff::DELETE),
+            array('b', MyersDiff::DELETE),
+            array('c', MyersDiff::KEEP),
+            array('b', MyersDiff::INSERT),
+            array('a', MyersDiff::KEEP),
+            array('b', MyersDiff::KEEP),
+            array('b', MyersDiff::DELETE),
+            array('a', MyersDiff::KEEP),
+            array('c', MyersDiff::INSERT),
+        );
 
         $this->assertSame($diff, $algorithm->calculate($x, $y));
     }
@@ -222,14 +222,14 @@ class MyersDiffTest extends \PHPUnit_Framework_TestCase
     public function testDeleteBeforeInsert()
     {
         $algorithm = new MyersDiff();
-        $x = ['a', 'b', 'c'];
-        $y = ['a', 'd', 'c'];
-        $diff = [
-            ['a', MyersDiff::KEEP],
-            ['b', MyersDiff::DELETE],
-            ['d', MyersDiff::INSERT],
-            ['c', MyersDiff::KEEP],
-        ];
+        $x = array('a', 'b', 'c');
+        $y = array('a', 'd', 'c');
+        $diff = array(
+            array('a', MyersDiff::KEEP),
+            array('b', MyersDiff::DELETE),
+            array('d', MyersDiff::INSERT),
+            array('c', MyersDiff::KEEP),
+        );
 
         $this->assertSame($diff, $algorithm->calculate($x, $y));
     }

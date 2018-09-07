@@ -25,9 +25,9 @@ class ConnectedComponentTest extends \PHPUnit_Framework_TestCase
      */
     public function testNoComponents()
     {
-        $graph = [];
+        $graph = array();
 
-        $components = [];
+        $components = array();
 
         $algorithm = new ConnectedComponent($graph);
 
@@ -47,18 +47,18 @@ class ConnectedComponentTest extends \PHPUnit_Framework_TestCase
      */
     public function testOneComponent()
     {
-        $graph = [
-            'A' => ['B' => 1, 'D' => 1, 'F' => 1],
-            'B' => ['A' => 1, 'C' => 1, 'D' => 1, 'F' => 1],
-            'C' => ['B' => 1, 'E' => 1, 'F' => 1],
-            'D' => ['A' => 1, 'B' => 1, 'E' => 1],
-            'E' => ['C' => 1, 'D' => 1],
-            'F' => ['A' => 1, 'B' => 1, 'C' => 1],
-        ];
+        $graph = array(
+            'A' => array('B' => 1, 'D' => 1, 'F' => 1),
+            'B' => array('A' => 1, 'C' => 1, 'D' => 1, 'F' => 1),
+            'C' => array('B' => 1, 'E' => 1, 'F' => 1),
+            'D' => array('A' => 1, 'B' => 1, 'E' => 1),
+            'E' => array('C' => 1, 'D' => 1),
+            'F' => array('A' => 1, 'B' => 1, 'C' => 1),
+        );
 
-        $components = [
-            1 => ['A', 'B', 'C', 'D', 'E', 'F'],
-        ];
+        $components = array(
+            1 => array('A', 'B', 'C', 'D', 'E', 'F'),
+        );
 
         $algorithm = new ConnectedComponent($graph);
 
@@ -78,19 +78,19 @@ class ConnectedComponentTest extends \PHPUnit_Framework_TestCase
      */
     public function testTwoComponent()
     {
-        $graph = [
-            'A' => ['B' => 1, 'D' => 1, 'F' => 1],
-            'B' => ['A' => 1, 'D' => 1, 'F' => 1],
-            'C' => ['E' => 1],
-            'D' => ['A' => 1, 'B' => 1],
-            'E' => ['C' => 1],
-            'F' => ['A' => 1, 'B' => 1],
-        ];
+        $graph = array(
+            'A' => array('B' => 1, 'D' => 1, 'F' => 1),
+            'B' => array('A' => 1, 'D' => 1, 'F' => 1),
+            'C' => array('E' => 1),
+            'D' => array('A' => 1, 'B' => 1),
+            'E' => array('C' => 1),
+            'F' => array('A' => 1, 'B' => 1),
+        );
 
-        $components = [
-            1 => ['A', 'B', 'D', 'F'],
-            2 => ['C', 'E'],
-        ];
+        $components = array(
+            1 => array('A', 'B', 'D', 'F'),
+            2 => array('C', 'E'),
+        );
 
         $algorithm = new ConnectedComponent($graph);
 
@@ -104,15 +104,15 @@ class ConnectedComponentTest extends \PHPUnit_Framework_TestCase
      */
     public function testUnconnected()
     {
-        $graph = [
-            'A' => [],
-            'B' => [],
-        ];
+        $graph = array(
+            'A' => array(),
+            'B' => array(),
+        );
 
-        $components = [
-            1 => ['A'],
-            2 => ['B'],
-        ];
+        $components = array(
+            1 => array('A'),
+            2 => array('B'),
+        );
 
         $algorithm = new ConnectedComponent($graph);
 

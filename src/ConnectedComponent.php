@@ -73,12 +73,12 @@ class ConnectedComponent
      */
     private function groupResults()
     {
-        $result = [];
+        $result = array();
         foreach ($this->nodes as $node => $component) {
             if (array_key_exists($component, $result)) {
                 $result[$component][] = $node;
             } else {
-                $result[$component] = [$node];
+                $result[$component] = array($node);
             }
         }
 

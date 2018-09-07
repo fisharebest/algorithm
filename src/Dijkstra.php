@@ -62,7 +62,7 @@ class Dijkstra
                     if ($this->distance[$closest] + $cost < $this->distance[$neighbor]) {
                         // A shorter path was found
                         $this->distance[$neighbor] = $this->distance[$closest] + $cost;
-                        $this->previous[$neighbor] = [$closest];
+                        $this->previous[$neighbor] = array($closest);
                         $this->queue[$neighbor] = $this->distance[$neighbor];
                     } elseif ($this->distance[$closest] + $cost === $this->distance[$neighbor]) {
                         // An equally short path was found
@@ -84,7 +84,7 @@ class Dijkstra
      */
     protected function extractPaths($target)
     {
-        $paths = [[$target]];
+        $paths = array(array($target));
 
         while (current($paths) !== false) {
             $key = key($paths);
@@ -113,7 +113,7 @@ class Dijkstra
      *
      * @return string[][] Zero or more shortest paths, each represented by a list of nodes
      */
-    public function shortestPaths($source, $target, array $exclude = [])
+    public function shortestPaths($source, $target, array $exclude = array())
     {
         // The shortest distance to all nodes starts with infinity...
         $this->distance = array_fill_keys(array_keys($this->graph), INF);
@@ -121,20 +121,20 @@ class Dijkstra
         $this->distance[$source] = 0;
 
         // The previously visited nodes
-        $this->previous = array_fill_keys(array_keys($this->graph), []);
+        $this->previous = array_fill_keys(array_keys($this->graph), array());
 
         // Process all nodes in order
-        $this->queue = [$source => 0];
+        $this->queue = array($source => 0);
         while (!empty($this->queue)) {
             $this->processNextNodeInQueue($exclude);
         }
 
         if ($source === $target) {
             // A null path
-            return [[$source]];
+            return array(array($source));
         } elseif (empty($this->previous[$target])) {
             // No path between $source and $target
-            return [];
+            return array();
         } else {
             // One or more paths were found between $source and $target
             return $this->extractPaths($target);

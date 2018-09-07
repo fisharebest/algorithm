@@ -50,9 +50,9 @@ class MyersDiff
      */
     private function extractSnakes(array $v_save, $x, $y)
     {
-        $snakes = [];
+        $snakes = array();
         for ($d = count($v_save) - 1; $x >= 0 && $y >= 0; $d--) {
-            array_unshift($snakes, [$x, $y]);
+            array_unshift($snakes, array($x, $y));
 
             $v = $v_save[$d];
             $k = $x - $y;
@@ -76,26 +76,28 @@ class MyersDiff
      * @param integer[][] $snakes Common subsequences
      * @param string[]    $a      First sequence
      * @param string[]    $b      Second sequence
+     *
+     * @return array[] - pairs of token and edit (-1 for delete, 0 for keep, +1 for insert)
      */
     private function formatSolution(array $snakes, array $a, array $b)
     {
-        $solution = [];
+        $solution = array();
         $x = 0;
         $y = 0;
         foreach ($snakes as $snake) {
             // Horizontals
             while ($snake[0] - $snake[1] > $x - $y) {
-                $solution[] = [$a[$x], self::DELETE];
+                $solution[] = array($a[$x], self::DELETE);
                 $x++;
             }
             // Verticals
             while ($snake[0] - $snake[1] < $x - $y) {
-                $solution[] = [$b[$y], self::INSERT];
+                $solution[] = array($b[$y], self::INSERT);
                 $y++;
             }
             // Diagonals
             while ($x < $snake[0]) {
-                $solution[] = [$a[$x], self::KEEP];
+                $solution[] = array($a[$x], self::KEEP);
                 $x++;
                 $y++;
             }
@@ -122,10 +124,10 @@ class MyersDiff
         $max = $m + $n;
 
         // Keep a copy of $v after each iteration of $d.
-        $v_save = [];
+        $v_save = array();
 
         // Find the shortest "D-path".
-        $v = [1 => 0];
+        $v = array(1 => 0);
         for ($d = 0; $d <= $max; $d++) {
             // Examine all possible "K-lines" for this "D-path".
             for ($k = -$d; $k <= $d; $k += 2) {
