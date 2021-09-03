@@ -1,12 +1,14 @@
 <?php
 
-namespace Fisharebest\Algorithm;
+namespace Fisharebest\Tests\Algorithm;
+
+use Fisharebest\Algorithm\Dijkstra;
 
 /**
  * @author    Greg Roach <greg@subaqua.co.uk>
- * @copyright (c) 2015 Greg Roach <greg@subaqua.co.uk>
+ * @copyright (c) 2021 Greg Roach <greg@subaqua.co.uk>
  * @license   GPL-3.0+
- *s
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -16,9 +18,9 @@ namespace Fisharebest\Algorithm;
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ * along with this program. If not, see <https://www.gnu.org/licenses>.
  */
-class DijkstraTest extends \PHPUnit_Framework_TestCase
+class DijkstraTest extends BaseTestCase
 {
     /**
      * An undirected graph, with non-negative edge values.
@@ -36,6 +38,8 @@ class DijkstraTest extends \PHPUnit_Framework_TestCase
      *
      *
      * @var integer[][] Test graph
+     *
+     * @covers \Fisharebest\Algorithm\Dijkstra
      */
     private $graph1 = array(
         'A' => array('B' => 9, 'D' => 14, 'F' => 7),
@@ -49,7 +53,9 @@ class DijkstraTest extends \PHPUnit_Framework_TestCase
     /**
      * Test that there are no paths to/from 'G'.
      *
-     * @return string[]
+     * @return void
+     *
+     * @covers \Fisharebest\Algorithm\Dijkstra
      */
     public function testNoPath()
     {
@@ -62,7 +68,9 @@ class DijkstraTest extends \PHPUnit_Framework_TestCase
     /**
      * Test that there is a null paths to/from the same node.
      *
-     * @return string[]
+     * @return void
+     *
+     * @covers \Fisharebest\Algorithm\Dijkstra
      */
     public function testNullPath()
     {
@@ -74,7 +82,9 @@ class DijkstraTest extends \PHPUnit_Framework_TestCase
     /**
      * Test there is a unique shortest path from 'A' to every other node.
      *
-     * @return string[]
+     * @return void
+     *
+     * @covers \Fisharebest\Algorithm\Dijkstra
      */
     public function testUniqueShortestPath()
     {
@@ -99,7 +109,9 @@ class DijkstraTest extends \PHPUnit_Framework_TestCase
     /**
      * Test the multiple shortest paths between 'E' and 'F'.
      *
-     * @return string[]
+     * @return void
+     *
+     * @covers \Fisharebest\Algorithm\Dijkstra
      */
     public function testMultipleShortestPaths()
     {
@@ -112,7 +124,9 @@ class DijkstraTest extends \PHPUnit_Framework_TestCase
     /**
      * Test the exclusion list, for next-shortest paths.
      *
-     * @return string[]
+     * @return void
+     *
+     * @covers \Fisharebest\Algorithm\Dijkstra
      */
     public function testExclusionList()
     {

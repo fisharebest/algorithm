@@ -1,12 +1,14 @@
 <?php
 
-namespace Fisharebest\Algorithm;
+namespace Fisharebest\Tests\Algorithm;
+
+use Fisharebest\Algorithm\MyersDiff;
 
 /**
  * @author    Greg Roach <greg@subaqua.co.uk>
- * @copyright (c) 2015 Greg Roach <greg@subaqua.co.uk>
+ * @copyright (c) 2021 Greg Roach <greg@subaqua.co.uk>
  * @license   GPL-3.0+
- *s
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -16,14 +18,16 @@ namespace Fisharebest\Algorithm;
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ * along with this program. If not, see <https://www.gnu.org/licenses>.
  */
-class MyersDiffTest extends \PHPUnit_Framework_TestCase
+class MyersDiffTest extends BaseTestCase
 {
     /**
      * Test empty sequences.
      *
      * @return void
+     *
+     * @covers \Fisharebest\Algorithm\MyersDiff
      */
     public function testBothEmpty()
     {
@@ -39,6 +43,8 @@ class MyersDiffTest extends \PHPUnit_Framework_TestCase
      * Test one empty sequence.
      *
      * @return void
+     *
+     * @covers \Fisharebest\Algorithm\MyersDiff
      */
     public function testFirstEmpty()
     {
@@ -58,6 +64,8 @@ class MyersDiffTest extends \PHPUnit_Framework_TestCase
      * Test one empty sequence.
      *
      * @return void
+     *
+     * @covers \Fisharebest\Algorithm\MyersDiff
      */
     public function testSecondEmpty()
     {
@@ -77,6 +85,8 @@ class MyersDiffTest extends \PHPUnit_Framework_TestCase
      * Test identical sequences containing one token.
      *
      * @return void
+     *
+     * @covers \Fisharebest\Algorithm\MyersDiff
      */
     public function testIdenticalOne()
     {
@@ -94,6 +104,8 @@ class MyersDiffTest extends \PHPUnit_Framework_TestCase
      * Test identical sequences containing two tokens.
      *
      * @return void
+     *
+     * @covers \Fisharebest\Algorithm\MyersDiff
      */
     public function testIdenticalTwo()
     {
@@ -112,6 +124,8 @@ class MyersDiffTest extends \PHPUnit_Framework_TestCase
      * Test identical sequences containing three tokens.
      *
      * @return void
+     *
+     * @covers \Fisharebest\Algorithm\MyersDiff
      */
     public function testIdenticalThree()
     {
@@ -131,6 +145,8 @@ class MyersDiffTest extends \PHPUnit_Framework_TestCase
      * Test different strings containing one token.
      *
      * @return void
+     *
+     * @covers \Fisharebest\Algorithm\MyersDiff
      */
     public function testSingleDifferentONe()
     {
@@ -149,6 +165,8 @@ class MyersDiffTest extends \PHPUnit_Framework_TestCase
      * Test different strings containing two token.
      *
      * @return void
+     *
+     * @covers \Fisharebest\Algorithm\MyersDiff
      */
     public function testSingleDifferentTwo()
     {
@@ -169,6 +187,8 @@ class MyersDiffTest extends \PHPUnit_Framework_TestCase
      * Test different strings containing three token.
      *
      * @return void
+     *
+     * @covers \Fisharebest\Algorithm\MyersDiff
      */
     public function testSingleDifferentThree()
     {
@@ -191,6 +211,8 @@ class MyersDiffTest extends \PHPUnit_Framework_TestCase
      * Test two non-empty sequences.
      *
      * @return void
+     *
+     * @covers \Fisharebest\Algorithm\MyersDiff
      */
     public function testBothNonEmpty()
     {
@@ -217,7 +239,9 @@ class MyersDiffTest extends \PHPUnit_Framework_TestCase
      * result as insert/delete.  Our algorithm consistently
      * deletes first.
      *
-     * void
+     * @return void
+     *
+     * @covers \Fisharebest\Algorithm\MyersDiff
      */
     public function testDeleteBeforeInsert()
     {
@@ -238,11 +262,15 @@ class MyersDiffTest extends \PHPUnit_Framework_TestCase
      * Test custom token comparison.
      *
      * @return void
+     *
+     * @covers \Fisharebest\Algorithm\MyersDiff
      */
     public function testCustomCompare()
     {
         $algorithm = new MyersDiff();
-        $ignorecase = static function ($x, $y) { return strtolower($x) === strtolower($y); };
+        $ignorecase = function ($x, $y) {
+            return strtolower($x) === strtolower($y);
+        };
         $x = array('a', 'b', 'c');
         $y = array('A', 'B', 'C');
         $diff = array(

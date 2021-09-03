@@ -1,12 +1,14 @@
 <?php
 
-namespace Fisharebest\Algorithm;
+namespace Fisharebest\Tests\Algorithm;
+
+use Fisharebest\Algorithm\ConnectedComponent;
 
 /**
  * @author    Greg Roach <greg@subaqua.co.uk>
- * @copyright (c) 2015 Greg Roach <greg@subaqua.co.uk>
+ * @copyright (c) 2021 Greg Roach <greg@subaqua.co.uk>
  * @license   GPL-3.0+
- *s
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -16,12 +18,14 @@ namespace Fisharebest\Algorithm;
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ * along with this program. If not, see <https://www.gnu.org/licenses>.
  */
-class ConnectedComponentTest extends \PHPUnit_Framework_TestCase
+class ConnectedComponentTest extends BaseTestCase
 {
     /**
      * A graph with no components.
+     *
+     * @covers \Fisharebest\Algorithm\ConnectedComponent
      */
     public function testNoComponents()
     {
@@ -44,6 +48,8 @@ class ConnectedComponentTest extends \PHPUnit_Framework_TestCase
      *  \   /    /
      *   \ /    /
      *    F----/
+     *
+     * @covers \Fisharebest\Algorithm\ConnectedComponent
      */
     public function testOneComponent()
     {
@@ -75,6 +81,8 @@ class ConnectedComponentTest extends \PHPUnit_Framework_TestCase
      *  \   /
      *   \ /
      *    F
+     *
+     * @covers \Fisharebest\Algorithm\ConnectedComponent
      */
     public function testTwoComponent()
     {
@@ -101,6 +109,8 @@ class ConnectedComponentTest extends \PHPUnit_Framework_TestCase
      * A graph with two component.
      *
      * A   B
+     *
+     * @covers \Fisharebest\Algorithm\ConnectedComponent
      */
     public function testUnconnected()
     {

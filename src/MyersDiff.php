@@ -4,7 +4,7 @@ namespace Fisharebest\Algorithm;
 
 /**
  * @author    Greg Roach <greg@subaqua.co.uk>
- * @copyright (c) 2015 Greg Roach <greg@subaqua.co.uk>
+ * @copyright (c) 2021 Greg Roach <greg@subaqua.co.uk>
  * @license   GPL-3.0+
  *
  * This program is free software: you can redistribute it and/or modify
@@ -16,7 +16,7 @@ namespace Fisharebest\Algorithm;
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ * along with this program. If not, see <https://www.gnu.org/licenses>.
  */
 
 /**
@@ -118,7 +118,9 @@ class MyersDiff
     public function calculate(array $a, array $b, $compare = null)
     {
         if ($compare === null) {
-            $compare = static function ($x, $y) { return $x === $y; };
+            $compare = function ($x, $y) {
+                return $x === $y;
+            };
         }
 
         // The algorithm uses array keys numbered from zero.
