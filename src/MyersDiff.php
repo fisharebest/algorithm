@@ -46,7 +46,7 @@ class MyersDiff
      * @param int      $x      End position
      * @param int      $y      End position
      *
-     * @return int[][]
+     * @return list<array{int, int}>
      */
     private function extractSnakes(array $v_save, $x, $y)
     {
@@ -73,11 +73,13 @@ class MyersDiff
     /**
      * Convert a list of "snakes" into a set of insert/keep/delete instructions.
      *
-     * @param integer[][] $snakes Common subsequences
-     * @param string[]    $a      First sequence
-     * @param string[]    $b      Second sequence
+     * @template T
      *
-     * @return array[] - pairs of token and edit (-1 for delete, 0 for keep, +1 for insert)
+     * @param list<array{int, int}> $snakes Common subsequences
+     * @param list<T>               $a      First sequence
+     * @param list<T>               $b      Second sequence
+     *
+     * @return list<array{T, -1|0|1}> - pairs of token and edit (-1 for delete, 0 for keep, +1 for insert)
      */
     private function formatSolution(array $snakes, array $a, array $b)
     {
@@ -109,11 +111,13 @@ class MyersDiff
     /**
      * Calculate the shortest edit sequence to convert $x into $y.
      *
-     * @param string[] $a - tokens (characters, words or lines)
-     * @param string[] $b - tokens (characters, words or lines)
-     * @param callable $compare - comparison function for tokens. Signature is compare($x, $y):bool. If null, === is used.
+     * @template T
      *
-     * @return array[] - pairs of token and edit (-1 for delete, 0 for keep, +1 for insert)
+     * @param list<T> $a - List of values to compare.
+     * @param list<T> $b - List of values to compare.
+     * @param (callable(T, T): bool)|null $compare - comparison function for tokens, or NULL to use === comparison.
+     *
+     * @return list<array{T, -1|0|1}> - pairs of token and edit (-1 for delete, 0 for keep, +1 for insert)
      */
     public function calculate(array $a, array $b, $compare = null)
     {
