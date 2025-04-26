@@ -79,7 +79,7 @@ class MyersDiff
      * @param list<T>               $a      First sequence
      * @param list<T>               $b      Second sequence
      *
-     * @return list<array{T, -1,0,1}> - pairs of token and edit (-1 for delete, 0 for keep, +1 for insert)
+     * @return list<array{T, -1|0|1}> - pairs of token and edit (-1 for delete, 0 for keep, +1 for insert)
      */
     private function formatSolution(array $snakes, array $a, array $b)
     {
@@ -117,7 +117,7 @@ class MyersDiff
      * @param list<T> $b - List of values to compare.
      * @param (callable(T, T): bool)|null $compare - comparison function for tokens, or NULL to use === comparison.
      *
-     * @return list<array{T, -1,0,1}> - pairs of token and edit (-1 for delete, 0 for keep, +1 for insert)
+     * @return list<array{T, -1|0|1}> - pairs of token and edit (-1 for delete, 0 for keep, +1 for insert)
      */
     public function calculate(array $a, array $b, $compare = null)
     {
