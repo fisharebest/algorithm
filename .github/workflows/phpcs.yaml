@@ -1,11 +1,11 @@
-name: Unit tests
+name: Code style
 
 on: [push, pull_request]
 
 jobs:
   run:
     runs-on: ${{ matrix.operating-system }}
-    name: phpunit, PHP ${{ matrix.php-version }}
+    name: phpcs, PHP ${{ matrix.php-version }}
 
     strategy:
       matrix:
@@ -18,8 +18,6 @@ jobs:
         with:
           php-version: ${{ matrix.php-version }}
           ini-file: 'development'
-          extensions: gd,intl,mbstring,sqlite,zip
-          coverage: pcov
 
       - uses: actions/checkout@v4
 
@@ -27,4 +25,4 @@ jobs:
 
       - run: composer install --no-progress
 
-      - run: composer phpunit
+      - run: composer phpcs

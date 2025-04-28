@@ -1,10 +1,8 @@
 <?php
 
-namespace Fisharebest\Algorithm;
-
 /**
  * @author    Greg Roach <greg@subaqua.co.uk>
- * @copyright (c) 2021 Greg Roach <greg@subaqua.co.uk>
+ * @copyright (c) 2025 Greg Roach <greg@subaqua.co.uk>
  * @license   GPL-3.0+
  *
  * This program is free software: you can redistribute it and/or modify
@@ -19,26 +17,28 @@ namespace Fisharebest\Algorithm;
  * along with this program. If not, see <https://www.gnu.org/licenses>.
  */
 
+namespace Fisharebest\Algorithm;
+
 /**
  * Class Dijkstra - Use Dijkstra's algorithm to calculate the shortest path
  * through a weighted, directed graph.
  */
 class Dijkstra
 {
-    /** @var integer[][] The graph, where $graph[node1][node2]=cost */
+    /** @var array<array<float>> The graph, where $graph[node1][node2]=cost */
     protected $graph;
 
-    /** @var int[] Distances from the source node to each other node */
+    /** @var array<float> Distances from the source node to each other node */
     protected $distance;
 
-    /** @var string[][] The previous node(s) in the path to the current node */
+    /** @var array<array<int|string>> The previous node(s) in the path to the current node */
     protected $previous;
 
-    /** @var int[] Nodes which have yet to be processed */
+    /** @var array<float> Nodes which have yet to be processed */
     protected $queue;
 
     /**
-     * @param integer[][] $graph
+     * @param array<array<float>> $graph
      */
     public function __construct($graph)
     {
@@ -48,7 +48,7 @@ class Dijkstra
     /**
      * Process the next (i.e. closest) entry in the queue.
      *
-     * @param string[] $exclude A list of nodes to exclude - for calculating next-shortest paths.
+     * @param array<string> $exclude A list of nodes to exclude - for calculating next-shortest paths.
      *
      * @return void
      */
@@ -80,7 +80,7 @@ class Dijkstra
      *
      * @param string $target The starting node (working backwards)
      *
-     * @return string[][] One or more shortest paths, each represented by a list of nodes
+     * @return array<array<int|string>> One or more shortest paths, each represented by a list of nodes
      */
     protected function extractPaths($target)
     {
@@ -105,11 +105,11 @@ class Dijkstra
     /**
      * Calculate the shortest path through a a graph, from $source to $target.
      *
-     * @param string   $source  The starting node
-     * @param string   $target  The ending node
-     * @param string[] $exclude A list of nodes to exclude - for calculating next-shortest paths.
+     * @param string        $source  The starting node
+     * @param string        $target  The ending node
+     * @param array<string> $exclude A list of nodes to exclude - for calculating next-shortest paths.
      *
-     * @return string[][] Zero or more shortest paths, each represented by a list of nodes
+     * @return array<array<int|string>> Zero or more shortest paths, each represented by a list of nodes
      */
     public function shortestPaths($source, $target, array $exclude = array())
     {
@@ -130,12 +130,14 @@ class Dijkstra
         if ($source === $target) {
             // A null path
             return array(array($source));
-        } elseif (empty($this->previous[$target])) {
+        }
+
+        if (empty($this->previous[$target])) {
             // No path between $source and $target
             return array();
-        } else {
-            // One or more paths were found between $source and $target
-            return $this->extractPaths($target);
         }
+
+        // One or more paths were found between $source and $target
+        return $this->extractPaths($target);
     }
 }

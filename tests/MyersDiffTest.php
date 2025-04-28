@@ -1,12 +1,8 @@
 <?php
 
-namespace Fisharebest\Tests\Algorithm;
-
-use Fisharebest\Algorithm\MyersDiff;
-
 /**
  * @author    Greg Roach <greg@subaqua.co.uk>
- * @copyright (c) 2021 Greg Roach <greg@subaqua.co.uk>
+ * @copyright (c) 2025 Greg Roach <greg@subaqua.co.uk>
  * @license   GPL-3.0+
  *
  * This program is free software: you can redistribute it and/or modify
@@ -20,16 +16,20 @@ use Fisharebest\Algorithm\MyersDiff;
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <https://www.gnu.org/licenses>.
  */
-class MyersDiffTest extends BaseTestCase
+
+namespace Fisharebest\Tests\Algorithm;
+
+use Fisharebest\Algorithm\MyersDiff;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\TestCase;
+
+#[CoversClass(MyersDiff::class)]
+class MyersDiffTest extends TestCase
 {
     /**
      * Test empty sequences.
-     *
-     * @return void
-     *
-     * @covers \Fisharebest\Algorithm\MyersDiff
      */
-    public function testBothEmpty()
+    public function testBothEmpty(): void
     {
         $algorithm = new MyersDiff();
         $x = array();
@@ -41,12 +41,8 @@ class MyersDiffTest extends BaseTestCase
 
     /**
      * Test one empty sequence.
-     *
-     * @return void
-     *
-     * @covers \Fisharebest\Algorithm\MyersDiff
      */
-    public function testFirstEmpty()
+    public function testFirstEmpty(): void
     {
         $algorithm = new MyersDiff();
         $x = array();
@@ -62,12 +58,8 @@ class MyersDiffTest extends BaseTestCase
 
     /**
      * Test one empty sequence.
-     *
-     * @return void
-     *
-     * @covers \Fisharebest\Algorithm\MyersDiff
      */
-    public function testSecondEmpty()
+    public function testSecondEmpty(): void
     {
         $algorithm = new MyersDiff();
         $x = array('a', 'b', 'c');
@@ -83,12 +75,8 @@ class MyersDiffTest extends BaseTestCase
 
     /**
      * Test identical sequences containing one token.
-     *
-     * @return void
-     *
-     * @covers \Fisharebest\Algorithm\MyersDiff
      */
-    public function testIdenticalOne()
+    public function testIdenticalOne(): void
     {
         $algorithm = new MyersDiff();
         $x = array('a');
@@ -102,12 +90,8 @@ class MyersDiffTest extends BaseTestCase
 
     /**
      * Test identical sequences containing two tokens.
-     *
-     * @return void
-     *
-     * @covers \Fisharebest\Algorithm\MyersDiff
      */
-    public function testIdenticalTwo()
+    public function testIdenticalTwo(): void
     {
         $algorithm = new MyersDiff();
         $x = array('a', 'b');
@@ -122,12 +106,8 @@ class MyersDiffTest extends BaseTestCase
 
     /**
      * Test identical sequences containing three tokens.
-     *
-     * @return void
-     *
-     * @covers \Fisharebest\Algorithm\MyersDiff
      */
-    public function testIdenticalThree()
+    public function testIdenticalThree(): void
     {
         $algorithm = new MyersDiff();
         $x = array('a', 'b', 'c');
@@ -143,12 +123,8 @@ class MyersDiffTest extends BaseTestCase
 
     /**
      * Test different strings containing one token.
-     *
-     * @return void
-     *
-     * @covers \Fisharebest\Algorithm\MyersDiff
      */
-    public function testSingleDifferentONe()
+    public function testSingleDifferentONe(): void
     {
         $algorithm = new MyersDiff();
         $x = array('a');
@@ -163,12 +139,8 @@ class MyersDiffTest extends BaseTestCase
 
     /**
      * Test different strings containing two token.
-     *
-     * @return void
-     *
-     * @covers \Fisharebest\Algorithm\MyersDiff
      */
-    public function testSingleDifferentTwo()
+    public function testSingleDifferentTwo(): void
     {
         $algorithm = new MyersDiff();
         $x = array('a', 'b');
@@ -185,12 +157,8 @@ class MyersDiffTest extends BaseTestCase
 
     /**
      * Test different strings containing three token.
-     *
-     * @return void
-     *
-     * @covers \Fisharebest\Algorithm\MyersDiff
      */
-    public function testSingleDifferentThree()
+    public function testSingleDifferentThree(): void
     {
         $algorithm = new MyersDiff();
         $x = array('a', 'b', 'c');
@@ -209,12 +177,8 @@ class MyersDiffTest extends BaseTestCase
 
     /**
      * Test two non-empty sequences.
-     *
-     * @return void
-     *
-     * @covers \Fisharebest\Algorithm\MyersDiff
      */
-    public function testBothNonEmpty()
+    public function testBothNonEmpty(): void
     {
         $algorithm = new MyersDiff();
         $x = array('a', 'b', 'c', 'a', 'b', 'b', 'a');
@@ -238,12 +202,8 @@ class MyersDiffTest extends BaseTestCase
      * Test delete-before-insert.  Delete/insert gives the same
      * result as insert/delete.  Our algorithm consistently
      * deletes first.
-     *
-     * @return void
-     *
-     * @covers \Fisharebest\Algorithm\MyersDiff
      */
-    public function testDeleteBeforeInsert()
+    public function testDeleteBeforeInsert(): void
     {
         $algorithm = new MyersDiff();
         $x = array('a', 'b', 'c');
@@ -260,12 +220,8 @@ class MyersDiffTest extends BaseTestCase
 
     /**
      * Test custom token comparison.
-     *
-     * @return void
-     *
-     * @covers \Fisharebest\Algorithm\MyersDiff
      */
-    public function testCustomCompare()
+    public function testCustomCompare(): void
     {
         $algorithm = new MyersDiff();
         $ignorecase = function ($x, $y) {

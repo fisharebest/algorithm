@@ -1,10 +1,8 @@
 <?php
 
-namespace Fisharebest\Algorithm;
-
 /**
  * @author    Greg Roach <greg@subaqua.co.uk>
- * @copyright (c) 2021 Greg Roach <greg@subaqua.co.uk>
+ * @copyright (c) 2025 Greg Roach <greg@subaqua.co.uk>
  * @license   GPL-3.0+
  *
  * This program is free software: you can redistribute it and/or modify
@@ -18,6 +16,8 @@ namespace Fisharebest\Algorithm;
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <https://www.gnu.org/licenses>.
  */
+
+namespace Fisharebest\Algorithm;
 
 /**
  * Class MyersDiff - find the shortest edit sequence to transform one string into another.
@@ -42,9 +42,9 @@ class MyersDiff
      * Backtrack through the intermediate results to extract the "snakes" that
      * are visited on the chosen "D-path".
      *
-     * @param string[] $v_save Intermediate results
-     * @param int      $x      End position
-     * @param int      $y      End position
+     * @param array<array<int>> $v_save Intermediate results
+     * @param int               $x      End position
+     * @param int               $y      End position
      *
      * @return list<array{int, int}>
      */
@@ -113,8 +113,8 @@ class MyersDiff
      *
      * @template T
      *
-     * @param list<T> $a - List of values to compare.
-     * @param list<T> $b - List of values to compare.
+     * @param array<T> $a - List of values to compare.
+     * @param array<T> $b - List of values to compare.
      * @param (callable(T, T): bool)|null $compare - comparison function for tokens, or NULL to use === comparison.
      *
      * @return list<array{T, -1|0|1}> - pairs of token and edit (-1 for delete, 0 for keep, +1 for insert)

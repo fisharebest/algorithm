@@ -1,12 +1,8 @@
 <?php
 
-namespace Fisharebest\Tests\Algorithm;
-
-use Fisharebest\Algorithm\ConnectedComponent;
-
 /**
  * @author    Greg Roach <greg@subaqua.co.uk>
- * @copyright (c) 2021 Greg Roach <greg@subaqua.co.uk>
+ * @copyright (c) 2025 Greg Roach <greg@subaqua.co.uk>
  * @license   GPL-3.0+
  *
  * This program is free software: you can redistribute it and/or modify
@@ -20,14 +16,20 @@ use Fisharebest\Algorithm\ConnectedComponent;
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <https://www.gnu.org/licenses>.
  */
-class ConnectedComponentTest extends BaseTestCase
+
+namespace Fisharebest\Tests\Algorithm;
+
+use Fisharebest\Algorithm\ConnectedComponent;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\TestCase;
+
+#[CoversClass(ConnectedComponent::class)]
+class ConnectedComponentTest extends TestCase
 {
     /**
      * A graph with no components.
-     *
-     * @covers \Fisharebest\Algorithm\ConnectedComponent
      */
-    public function testNoComponents()
+    public function testNoComponents(): void
     {
         $graph = array();
 
@@ -48,10 +50,8 @@ class ConnectedComponentTest extends BaseTestCase
      *  \   /    /
      *   \ /    /
      *    F----/
-     *
-     * @covers \Fisharebest\Algorithm\ConnectedComponent
      */
-    public function testOneComponent()
+    public function testOneComponent(): void
     {
         $graph = array(
             'A' => array('B' => 1, 'D' => 1, 'F' => 1),
@@ -81,10 +81,8 @@ class ConnectedComponentTest extends BaseTestCase
      *  \   /
      *   \ /
      *    F
-     *
-     * @covers \Fisharebest\Algorithm\ConnectedComponent
      */
-    public function testTwoComponent()
+    public function testTwoComponent(): void
     {
         $graph = array(
             'A' => array('B' => 1, 'D' => 1, 'F' => 1),
@@ -109,10 +107,8 @@ class ConnectedComponentTest extends BaseTestCase
      * A graph with two component.
      *
      * A   B
-     *
-     * @covers \Fisharebest\Algorithm\ConnectedComponent
      */
-    public function testUnconnected()
+    public function testUnconnected(): void
     {
         $graph = array(
             'A' => array(),

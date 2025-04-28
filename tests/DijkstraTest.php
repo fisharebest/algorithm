@@ -1,12 +1,8 @@
 <?php
 
-namespace Fisharebest\Tests\Algorithm;
-
-use Fisharebest\Algorithm\Dijkstra;
-
 /**
  * @author    Greg Roach <greg@subaqua.co.uk>
- * @copyright (c) 2021 Greg Roach <greg@subaqua.co.uk>
+ * @copyright (c) 2025 Greg Roach <greg@subaqua.co.uk>
  * @license   GPL-3.0+
  *
  * This program is free software: you can redistribute it and/or modify
@@ -20,7 +16,15 @@ use Fisharebest\Algorithm\Dijkstra;
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <https://www.gnu.org/licenses>.
  */
-class DijkstraTest extends BaseTestCase
+
+namespace Fisharebest\Tests\Algorithm;
+
+use Fisharebest\Algorithm\Dijkstra;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\TestCase;
+
+#[CoversClass(Dijkstra::class)]
+class DijkstraTest extends TestCase
 {
     /**
      * An undirected graph, with non-negative edge values.
@@ -52,12 +56,8 @@ class DijkstraTest extends BaseTestCase
 
     /**
      * Test that there are no paths to/from 'G'.
-     *
-     * @return void
-     *
-     * @covers \Fisharebest\Algorithm\Dijkstra
      */
-    public function testNoPath()
+    public function testNoPath(): void
     {
         $dijkstra = new Dijkstra($this->graph1);
 
@@ -67,12 +67,8 @@ class DijkstraTest extends BaseTestCase
 
     /**
      * Test that there is a null paths to/from the same node.
-     *
-     * @return void
-     *
-     * @covers \Fisharebest\Algorithm\Dijkstra
      */
-    public function testNullPath()
+    public function testNullPath(): void
     {
         $dijkstra = new Dijkstra($this->graph1);
 
@@ -81,12 +77,8 @@ class DijkstraTest extends BaseTestCase
 
     /**
      * Test there is a unique shortest path from 'A' to every other node.
-     *
-     * @return void
-     *
-     * @covers \Fisharebest\Algorithm\Dijkstra
      */
-    public function testUniqueShortestPath()
+    public function testUniqueShortestPath(): void
     {
         $dijkstra = new Dijkstra($this->graph1);
 
@@ -108,12 +100,8 @@ class DijkstraTest extends BaseTestCase
 
     /**
      * Test the multiple shortest paths between 'E' and 'F'.
-     *
-     * @return void
-     *
-     * @covers \Fisharebest\Algorithm\Dijkstra
      */
-    public function testMultipleShortestPaths()
+    public function testMultipleShortestPaths(): void
     {
         $dijkstra = new Dijkstra($this->graph1);
 
@@ -123,12 +111,8 @@ class DijkstraTest extends BaseTestCase
 
     /**
      * Test the exclusion list, for next-shortest paths.
-     *
-     * @return void
-     *
-     * @covers \Fisharebest\Algorithm\Dijkstra
      */
-    public function testExclusionList()
+    public function testExclusionList(): void
     {
         $dijkstra = new Dijkstra($this->graph1);
 

@@ -1,10 +1,8 @@
 <?php
 
-namespace Fisharebest\Algorithm;
-
 /**
  * @author    Greg Roach <greg@subaqua.co.uk>
- * @copyright (c) 2021 Greg Roach <greg@subaqua.co.uk>
+ * @copyright (c) 2025 Greg Roach <greg@subaqua.co.uk>
  * @license   GPL-3.0+
  *
  * This program is free software: you can redistribute it and/or modify
@@ -19,23 +17,25 @@ namespace Fisharebest\Algorithm;
  * along with this program. If not, see <https://www.gnu.org/licenses>.
  */
 
+namespace Fisharebest\Algorithm;
+
 /**
  * Class ConnectedComponent - Use a depth-first search to find connected
  * components of an undirected graph.
  */
 class ConnectedComponent
 {
-    /** @var integer[][] The graph, where $graph[node1][node2]=cost */
+    /** @var array<int|string,array<int|string,int>> The graph, where $graph[node1][node2]=cost */
     protected $graph;
 
-    /** @var int[] The component number for each node */
+    /** @var array<int> The component number for each node */
     protected $nodes;
 
     /** @var int The next connected-component to find. */
     protected $component;
 
     /**
-     * @param integer[][] $graph
+     * @param array<int|string,array<int|string,int>> $graph
      */
     public function __construct($graph)
     {
@@ -47,7 +47,7 @@ class ConnectedComponent
     /**
      * An array of components (arrays).
      *
-     * @return array
+     * @return array<list<int|string>>
      */
     public function findConnectedComponents()
     {
@@ -69,7 +69,7 @@ class ConnectedComponent
     /**
      * Group the nodes by component.
      *
-     * @return array
+     * @return array<list<int|string>>
      */
     private function groupResults()
     {
@@ -89,8 +89,10 @@ class ConnectedComponent
      * Find all nodes connected to $node and mark them as part of
      * component $component.
      *
-     * @param $node
-     * @param $component
+     * @param int|string $node
+     * @param int        $component
+     *
+     * @return void
      */
     private function depthFirstSearch($node, $component)
     {
